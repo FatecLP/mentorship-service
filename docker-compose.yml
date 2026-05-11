@@ -1,0 +1,29 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: menthfy-mysql
+    restart: always
+    environment:
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: menthfy-api
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+
+volumes:
+  mysql_data:
