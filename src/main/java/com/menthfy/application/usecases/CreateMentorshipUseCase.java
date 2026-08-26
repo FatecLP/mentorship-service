@@ -1,10 +1,9 @@
 package com.menthfy.application.usecases;
 
 
-import org.springframework.stereotype.Service;
-
 import com.menthfy.domain.models.Mentorship;
 import com.menthfy.infrastructure.persistence.JpaMentorshipRepository;
+import org.springframework.stereotype.Service;
 
 @Service
 public class CreateMentorshipUseCase {
