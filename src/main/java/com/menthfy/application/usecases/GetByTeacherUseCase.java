@@ -1,12 +1,9 @@
 package com.menthfy.application.usecases;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.menthfy.application.dto.MentorshipResponse;
-import com.menthfy.domain.models.Mentorship;
 import com.menthfy.infrastructure.persistence.JpaMentorshipRepository;
+import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class GetByTeacherUseCase {

@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/mentorships")
-@CrossOrigin("*")
 public class MentorshipController {
     private final CreateMentorshipUseCase createUseCase;
     private final AcceptMentorshipUseCase acceptUseCase;
