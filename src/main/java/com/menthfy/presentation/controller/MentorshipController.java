@@ -16,17 +16,20 @@ public class MentorshipController {
     private final AcceptMentorshipUseCase acceptUseCase;
     private final GetByStudentUseCase studentUseCase;
     private final GetByTeacherUseCase teacherUseCase;
+    private final CancelMentorshipUseCase cancelUseCase;
 
     public MentorshipController(
             CreateMentorshipUseCase createUseCase,
             AcceptMentorshipUseCase acceptUseCase,
             GetByStudentUseCase studentUseCase,
-            GetByTeacherUseCase teacherUseCase
+            GetByTeacherUseCase teacherUseCase,
+            CancelMentorshipUseCase cancelUseCase
     ) {
         this.createUseCase = createUseCase;
         this.acceptUseCase = acceptUseCase;
         this.studentUseCase = studentUseCase;
         this.teacherUseCase = teacherUseCase;
+        this.cancelUseCase = cancelUseCase;
     }
 
     @PostMapping
@@ -41,7 +44,12 @@ public class MentorshipController {
     public Mentorship accept(@PathVariable Long id) {
         return acceptUseCase.execute(id);
     }
-
+    
+    @PutMapping("/{id}/cancel")
+    public Mentorship cancel(@PathVariable Long id) {
+        return cancelUseCase.execute(id);
+    }
+    
     @GetMapping("/student/{id}")
     public List<StudentMentorshipResponse> getByStudent(@PathVariable Long id) {
         return studentUseCase.execute(id);
@@ -51,4 +59,5 @@ public class MentorshipController {
     public List<MentorshipResponse> getByTeacher(@PathVariable Long id) {
         return teacherUseCase.execute(id);
     }
+
 }
