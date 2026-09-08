@@ -5,11 +5,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/** EN: Configures cross-origin access for the REST API.
+ * PT-BR: Configura o acesso de origens cruzadas para a API REST. */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Value("${app.cors.allowed-origins:http://localhost:3000,http://localhost:5173}")
     private String[] allowedOrigins;
 
+    /** Applies the configured origins and HTTP methods to API routes. */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")

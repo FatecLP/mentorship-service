@@ -32,10 +32,21 @@ Este serviço faz parte da arquitetura distribuída do ecossistema Menthfy:
 
 ## 📡 Endpoints da API REST (`/api/mentorships`)
 
+### Swagger / OpenAPI
+
+Com a aplicação em execução, a documentação interativa está disponível em:
+
+- **Swagger UI:** `http://localhost:8080/swagger-ui.html`
+- **OpenAPI JSON:** `http://localhost:8080/v3/api-docs`
+- **Javadoc:** execute `./mvnw javadoc:javadoc` (Windows: `mvnw.cmd javadoc:javadoc`) e abra `target/reports/apidocs/index.html`.
+
+O mapa técnico completo do serviço está em [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
 | Método | Endpoint | Descrição |
 | :--- | :--- | :--- |
 | `POST` | `/api/mentorships` | Solicita uma nova mentoria (Aluno -> Professor) |
 | `PUT` | `/api/mentorships/{id}/accept` | Professor aceita a mentoria solicitada |
+| `PUT` | `/api/mentorships/{id}/cancel` | Cancela uma mentoria solicitada |
 | `GET` | `/api/mentorships/teacher/{teacherId}` | Lista todas as mentorias de um professor |
 | `GET` | `/api/mentorships/student/{studentId}` | Lista todas as mentorias de um aluno |
 
@@ -49,7 +60,7 @@ Este serviço faz parte da arquitetura distribuída do ecossistema Menthfy:
   "teacherId": 10
 }
 ```
-**Resposta (201 Created):**
+**Resposta (200 OK):**
 ```json
 {
   "id": 1,

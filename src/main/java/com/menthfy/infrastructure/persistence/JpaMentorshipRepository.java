@@ -3,18 +3,21 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 import com.menthfy.domain.models.Mentorship;
 
 
-@Repository
+/** EN: Persistence gateway for mentorship aggregates and enriched read projections.
+ * PT-BR: Gateway de persistência das mentorias e das projeções enriquecidas. */
 public interface  JpaMentorshipRepository  extends JpaRepository<Mentorship, Long>{
 
+    /** Finds mentorships created by a student. */
     List<Mentorship> findByStudentId(Long studentId);
 
+    /** Finds mentorships assigned to a teacher. */
     List<Mentorship> findByTeacherId(Long teacherId);
-    
+
+    /** Checks whether a pending request already exists for a student-teacher pair. */
     @Query("""
     SELECT COUNT(m) > 0 FROM Mentorship m
     WHERE m.studentId = :studentId
@@ -23,6 +26,7 @@ public interface  JpaMentorshipRepository  extends JpaRepository<Mentorship, Lon
     """)
     boolean existsPending(Long studentId, Long teacherId);
 
+    /** Loads teacher-facing mentorship data with the student's name. */
     @Query(value = """
     SELECT m.id,
         m.student_id,
@@ -35,6 +39,7 @@ public interface  JpaMentorshipRepository  extends JpaRepository<Mentorship, Lon
     """, nativeQuery = true)
     List<Object[]> findByTeacherWithStudentName(Long teacherId);
 
+    /** Loads student-facing mentorship data with the teacher's profile fields. */
     @Query(value = """
     SELECT 
         m.id,
